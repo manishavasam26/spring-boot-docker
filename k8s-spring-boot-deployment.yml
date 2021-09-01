@@ -12,15 +12,6 @@ spec:
       labels:
         app: jhooq-springboot
     spec:
-      tolerations:
-      - key: "node-role.kubernetes.io/master"
-        operator: "Exists"
-        effect: "NoSchedule"
-      - key: "node.kubernetes.io/unreachable"
-        operator: "Exists"
-        effect: "NoSchedule"
-       nodeSelector:
-        kubernetes.io/hostname: ip-172-31-20-243
       containers:
         - name: springboot
           image: manishavasam26/spring-application:spring-application

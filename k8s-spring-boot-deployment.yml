@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: jhooq-springboot
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: jhooq-springboot
@@ -12,9 +12,18 @@ spec:
       labels:
         app: jhooq-springboot
     spec:
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+        effect: "NoSchedule"
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoSchedule"
+       nodeSelector:
+        kubernetes.io/hostname: ip-172-31-20-243
       containers:
         - name: springboot
-          image: rahulwagh17/jhooq-docker-demo:jhooq-docker-demo
+          image: manishavasam26/spring-application:spring-application
           ports:
             - containerPort: 8080
           env:
